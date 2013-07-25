@@ -47,4 +47,6 @@ response.txt
 *.orig
 terminator/
 
-=======
+# Gradle
+.gradle
+app/build

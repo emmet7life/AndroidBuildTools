@@ -34,7 +34,6 @@ dependencies {
     compile 'com.google.android:support-v4:r11'
 
     instrumentTestCompile project(':core')
-    instrumentTestCompile files('../core/lib/jackson-databind-2.2.0.jar')
     instrumentTestCompile 'com.google.dexmaker:dexmaker:1.0',
             'com.google.dexmaker:dexmaker-mockito:1.0',
             'org.mockito:mockito-core:1.9.5',
