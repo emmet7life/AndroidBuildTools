@@ -11,11 +11,11 @@ public class URIFactory {
     private static final String HOST = "api.stackexchange.com";
     private static final int DEFAULT_PORT = -1;
 
-    private static URI createUri(String path) {
+    private URI prepareURI(String path) {
         return prepareURI(path, null);
     }
 
-    private static URI prepareURI(String path, String query) {
+    private URI prepareURI(String path, String query) {
         try {
             return URIUtils.createURI(SCHEME, HOST, DEFAULT_PORT, path, query, null);
         } catch (URISyntaxException e) {
@@ -23,7 +23,7 @@ public class URIFactory {
         }
     }
 
-    public static URI searchByTag(String searchedTag) {
-        return createUri(new StringBuilder("/2.1/search?order=desc&sort=activity&tagged=").append(searchedTag).append("&site=stackoverflow").toString());
+    public URI searchByTag(String searchedTag) {
+        return prepareURI("/2.1/search?order=desc&sort=activity&tagged=" + searchedTag + "&site=stackoverflow");
     }
 }

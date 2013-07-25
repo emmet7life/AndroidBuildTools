@@ -15,7 +15,7 @@ import com.novoda.stackoverflow.utils.URIFactory;
 import java.io.IOException;
 import java.net.URI;
 
-public class SOPostListActivity extends FragmentActivity implements TaggedPostsLoader.Callback {
+public class PostsListActivity extends FragmentActivity implements TaggedPostsLoader.Callback {
 
     public static final String SELECTED_TAG = "selectedTag";
     private ListView listView;
@@ -39,7 +39,7 @@ public class SOPostListActivity extends FragmentActivity implements TaggedPostsL
     }
 
     private URI taggerPostsUri(String queriedTag) {
-        return URIFactory.searchByTag(queriedTag);
+        return new URIFactory().searchByTag(queriedTag);
     }
 
     @Override
@@ -48,9 +48,9 @@ public class SOPostListActivity extends FragmentActivity implements TaggedPostsL
         try {
             posts = mapper.readValue(json, StackoverflowPosts.class);
         } catch (IOException e) {
-            Log.e(SOPostListActivity.class.getSimpleName(), "JSON mapping failed");
+            Log.e(PostsListActivity.class.getSimpleName(), "JSON mapping failed");
         }
-        Log.e(SOPostListActivity.class.getSimpleName(), "Posts extracted from JSON");
+        Log.e(PostsListActivity.class.getSimpleName(), "Posts extracted from JSON");
         updateView();
     }
 

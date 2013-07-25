@@ -9,7 +9,6 @@ public class CompletedTask {
     public final Result result;
     public final Throwable exception;
     public final String json;
-    public int loaderID;
 
     public CompletedTask(Result result) {
         this.result = result;
@@ -27,13 +26,5 @@ public class CompletedTask {
         this.result = result;
         this.exception = null;
         this.json = json;
-    }
-
-    public int getLoaderID() {
-        return loaderID;
-    }
-
-    public void setLoaderID(int loaderID) {
-        this.loaderID = loaderID;
     }
 }

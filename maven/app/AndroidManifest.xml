@@ -12,7 +12,7 @@
     android:label="@string/app_name">
 
     <activity
-      android:name="com.novoda.stackoverflow.tags.SOTagListActivity"
+      android:name=".tags.TagListActivity"
       android:label="@string/tag_list_activity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
     </activity>
 
     <activity
-      android:name="com.novoda.stackoverflow.posts.SOPostListActivity"
+      android:name=".posts.PostsListActivity"
       android:label="@string/post_list_activity"/>
 
   </application>

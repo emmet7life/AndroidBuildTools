@@ -4,16 +4,16 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 
 import com.novoda.stackoverflow.R;
-import com.novoda.stackoverflow.tags.SOTagListActivity;
+import com.novoda.stackoverflow.tags.TagListActivity;
 
 import static android.test.ViewAsserts.assertOnScreen;
 
-public class SOTagListActivityTest extends ActivityInstrumentationTestCase2<SOTagListActivity> {
+public class TagListActivityTest extends ActivityInstrumentationTestCase2<TagListActivity> {
 
-    private SOTagListActivity activity;
+    private TagListActivity activity;
 
-    public SOTagListActivityTest() {
-        super(SOTagListActivity.class);
+    public TagListActivityTest() {
+        super(TagListActivity.class);
     }
 
     @Override

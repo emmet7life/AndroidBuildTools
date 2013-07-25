@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.novoda.stackoverflow.R;
-import com.novoda.stackoverflow.posts.SOPostListActivity;
+import com.novoda.stackoverflow.posts.PostsListActivity;
 
-public class SOTagListActivity extends FragmentActivity implements AdapterView.OnItemClickListener{
+public class TagListActivity extends FragmentActivity implements AdapterView.OnItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class SOTagListActivity extends FragmentActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent postsListActivity = new Intent(this, SOPostListActivity.class);
-        postsListActivity.putExtra(SOPostListActivity.SELECTED_TAG, tagsFromResources()[position]);
+        Intent postsListActivity = new Intent(this, PostsListActivity.class);
+        postsListActivity.putExtra(PostsListActivity.SELECTED_TAG, tagsFromResources()[position]);
         startActivity(postsListActivity);
     }
 }
