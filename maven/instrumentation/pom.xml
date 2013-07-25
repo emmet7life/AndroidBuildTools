@@ -29,7 +29,7 @@
     </dependency>
 
     <dependency>
-      <groupId>com.test.something</groupId>
+      <groupId>com.novoda.stackoverflow</groupId>
       <artifactId>app</artifactId>
       <type>apk</type>
       <version>${project.version}</version>
@@ -37,7 +37,7 @@
     </dependency>
 
     <dependency>
-      <groupId>com.test.something</groupId>
+      <groupId>com.novoda.stackoverflow</groupId>
       <artifactId>app</artifactId>
       <type>jar</type>
       <version>${project.version}</version>

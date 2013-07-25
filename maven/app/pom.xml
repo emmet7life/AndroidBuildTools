@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.test.something</groupId>
+  <groupId>com.novoda.stackoverflow</groupId>
   <artifactId>app</artifactId>
   <packaging>apk</packaging>
   <name>android-maven-test - Application</name>
@@ -17,7 +17,7 @@
   <dependencies>
 
     <dependency>
-      <groupId>com.test.something</groupId>
+      <groupId>com.novoda.stackoverflow</groupId>
       <artifactId>core</artifactId>
       <version>${project.version}</version>
     </dependency>
