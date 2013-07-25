@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.4'
+    }
+}
+
+apply plugin: 'android'
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+configurations {
+    robolectric {
+        extendsFrom compile
+    }
+}
+
+sourceSets {
+    robolectric {
+        java.srcDir file('src/test/java')
+        resources.srcDir file('src/test/resources')
+        compileClasspath += configurations.robolectric
+        runtimeClasspath += compileClasspath
+    }
+}
+
+dependencies {
+
+    compile project(':core')
+    compile 'com.google.android:support-v4:r11'
+
+    instrumentTestCompile project(':core')
+    instrumentTestCompile files('../core/lib/jackson-databind-2.2.0.jar')
+    instrumentTestCompile 'com.google.dexmaker:dexmaker:1.0',
+            'com.google.dexmaker:dexmaker-mockito:1.0',
+            'org.mockito:mockito-core:1.9.5',
+            'com.jayway.android.robotium:robotium-solo:3.6',
+            'com.squareup.spoon:spoon-client:1.0.1',
+            'com.squareup:fest-android:1.0.3'
+
+    robolectricCompile 'com.squareup:fest-android:1.0.3'
+    robolectricCompile 'org.robolectric:robolectric:2.0-alpha-2'
+    robolectricCompile 'org.mockito:mockito-all:1.9.5', 'org.easytesting:fest-assert-core:2.0M8'
+    robolectricCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17"
+
+    defaultConfig {
+        versionCode 5
+        versionName "1.0-SNAPSHOT"
+        minSdkVersion 14
+        targetSdkVersion 17
+    }
+}
+
+
+project.getPlugins().getPlugin('android').prepareTaskMap.each {
+    sourceSets.aspectj.runtimeClasspath += files(it.value.explodedDir.getAbsolutePath() + '/classes.jar')
+}
+
+task robolectric(type: Test, dependsOn: assemble) {
+
+    workingDir 'src/main'
+
+    testClassesDir = sourceSets.robolectric.output.classesDir
+
+    android.sourceSets.main.java.srcDirs.each { dir ->
+        def buildDir = dir.getAbsolutePath().split('/')
+        buildDir = (buildDir[0..(buildDir.length - 4)] + ['build', 'classes', 'debug']).join('/')
+
+        project.getPlugins().getPlugin('android').prepareTaskMap.each {
+            sourceSets.robolectric.compileClasspath += files(it.value.explodedDir.getAbsolutePath() + '/classes.jar')
+            sourceSets.robolectric.runtimeClasspath += files(it.value.explodedDir.getAbsolutePath() + '/classes.jar')
+        }
+
+        sourceSets.robolectric.compileClasspath += files(buildDir)
+        sourceSets.robolectric.runtimeClasspath += files(buildDir)
+    }
+
+    classpath = sourceSets.robolectric.runtimeClasspath
+}

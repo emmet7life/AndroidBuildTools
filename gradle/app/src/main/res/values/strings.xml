@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">AndroidBuildTool-Maven</string>
+  <string name="tag_list_activity">Search Stackoverflow by tag</string>
+  <string name="post_list_activity">Stackoverflow posts</string>
+</resources>

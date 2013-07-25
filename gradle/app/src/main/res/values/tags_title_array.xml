@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="tags_title_array">
+    <item>android</item>
+    <item>gradle</item>
+    <item>android-studio</item>
+    <item>intellij</item>
+    <item>eclipse</item>
+  </string-array>
+</resources>
