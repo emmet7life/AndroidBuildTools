@@ -1,18 +1,17 @@
 package com.novoda.stackoverflow.json;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StackoverflowPosts {
-    @SerializedName("items")
     private List<Post> posts = new ArrayList<Post>();
-    @SerializedName("quota_remaining")
     private int remainingRequests;
-    @SerializedName("quota_max")
     private int maxRequests;
-    @SerializedName("has_more")
     private boolean hasMore;
 
     public StackoverflowPosts(List<Post> posts, int remainingRequests, int maxRequests, boolean hasMore) {
@@ -20,6 +19,16 @@ public class StackoverflowPosts {
         this.remainingRequests = remainingRequests;
         this.maxRequests = maxRequests;
         this.hasMore = hasMore;
+    }
+
+    @JsonCreator
+    public static StackoverflowPosts from(
+            @JsonProperty("items") List<Post> posts,
+            @JsonProperty("quota_remaining") int remainingRequests,
+            @JsonProperty("quota_max") int maxRequests,
+            @JsonProperty("has_more") boolean hasMore
+    ) {
+        return new StackoverflowPosts(posts, remainingRequests, maxRequests, hasMore);
     }
 
     public List<Post> getPosts() {

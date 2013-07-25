@@ -6,15 +6,14 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novoda.stackoverflow.R;
 import com.novoda.stackoverflow.json.StackoverflowPosts;
 import com.novoda.stackoverflow.loader.TaggedPostsLoader;
 import com.novoda.stackoverflow.utils.URIFactory;
 
+import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 public class SOPostListActivity extends FragmentActivity implements TaggedPostsLoader.Callback {
 
@@ -44,9 +43,13 @@ public class SOPostListActivity extends FragmentActivity implements TaggedPostsL
     }
 
     @Override
-    public void onLoadFinished(JsonObject jsonObject) {
-        Gson gson = new Gson();
-        posts = gson.fromJson(jsonObject, StackoverflowPosts.class);
+    public void onLoadFinished(String json) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            posts = mapper.readValue(json, StackoverflowPosts.class);
+        } catch (IOException e) {
+            Log.e(SOPostListActivity.class.getSimpleName(), "JSON mapping failed");
+        }
         Log.e(SOPostListActivity.class.getSimpleName(), "Posts extracted from JSON");
         updateView();
     }

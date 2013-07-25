@@ -3,7 +3,6 @@ package com.novoda.stackoverflow.loader;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.google.gson.JsonObject;
 import com.novoda.stackoverflow.connectivity.CompletedTask;
 import com.novoda.stackoverflow.connectivity.StackoverflowCall;
 
@@ -32,8 +31,8 @@ public class StackoverflowLoader extends AsyncTaskLoader<CompletedTask> implemen
     }
 
     @Override
-    public void onStackoverflowCallSuccess(JsonObject jsonObject) {
-        completedTask = new CompletedTask(CompletedTask.Result.SUCCESS, jsonObject);
+    public void onStackoverflowCallSuccess(String json) {
+        completedTask = new CompletedTask(CompletedTask.Result.SUCCESS, json);
     }
 
     @Override

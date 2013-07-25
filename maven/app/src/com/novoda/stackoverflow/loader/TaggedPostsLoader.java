@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import com.google.gson.JsonObject;
 import com.novoda.stackoverflow.connectivity.CompletedTask;
-import com.novoda.stackoverflow.json.StackoverflowPosts;
 
 import java.net.URI;
 
@@ -29,7 +27,7 @@ public class TaggedPostsLoader implements LoaderManager.LoaderCallbacks<Complete
     }
 
     public interface Callback {
-        void onLoadFinished(JsonObject jsonObject);
+        void onLoadFinished(String json);
     }
 
     public void restart() {
@@ -44,7 +42,7 @@ public class TaggedPostsLoader implements LoaderManager.LoaderCallbacks<Complete
     @Override
     public void onLoadFinished(Loader<CompletedTask> completedTaskLoader, CompletedTask completedTask) {
         if (completedTask.result == CompletedTask.Result.SUCCESS) {
-            callback.onLoadFinished(completedTask.jsonObject);
+            callback.onLoadFinished(completedTask.json);
         }
     }
 

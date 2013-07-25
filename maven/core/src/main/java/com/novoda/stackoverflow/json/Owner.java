@@ -1,22 +1,18 @@
 package com.novoda.stackoverflow.json;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Owner {
 
-    @SerializedName("user_id")
     private long userId;
-    @SerializedName("display_name")
     private String name;
-    @SerializedName("reputation")
     private long reputation;
-    @SerializedName("user_type")
     private String userType;
-    @SerializedName("profile_image")
     private String profileImage;
-    @SerializedName("link")
     private String profileLink;
-    @SerializedName("accept_rate")
     private int acceptRate;
 
     public Owner(long userId, String name, long reputation, String userType, String profileImage, String profileLink, int acceptRate) {
@@ -27,6 +23,19 @@ public class Owner {
         this.profileImage = profileImage;
         this.profileLink = profileLink;
         this.acceptRate = acceptRate;
+    }
+
+    @JsonCreator
+    public static Owner from(
+            @JsonProperty("user_id") long userId,
+            @JsonProperty("display_name") String name,
+            @JsonProperty("reputation") long reputation,
+            @JsonProperty("user_type") String userType,
+            @JsonProperty("profile_image") String profileImage,
+            @JsonProperty("link") String profileLink,
+            @JsonProperty("accept_rate") int acceptRate
+    ) {
+        return new Owner(userId, name, reputation, userType, profileImage, profileLink, acceptRate);
     }
 
     public long getUserId() {

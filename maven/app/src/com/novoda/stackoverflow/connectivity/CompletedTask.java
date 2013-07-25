@@ -1,7 +1,5 @@
 package com.novoda.stackoverflow.connectivity;
 
-import com.google.gson.JsonObject;
-
 public class CompletedTask {
 
     public enum Result {
@@ -10,25 +8,25 @@ public class CompletedTask {
 
     public final Result result;
     public final Throwable exception;
-    public final JsonObject jsonObject;
+    public final String json;
     public int loaderID;
 
     public CompletedTask(Result result) {
         this.result = result;
         this.exception = null;
-        this.jsonObject = null;
+        this.json = null;
     }
 
     public CompletedTask(Result result, Throwable exception) {
         this.result = result;
         this.exception = exception;
-        this.jsonObject = null;
+        this.json = null;
     }
 
-    public CompletedTask(Result result, JsonObject jsonObject) {
+    public CompletedTask(Result result, String json) {
         this.result = result;
         this.exception = null;
-        this.jsonObject = jsonObject;
+        this.json = json;
     }
 
     public int getLoaderID() {

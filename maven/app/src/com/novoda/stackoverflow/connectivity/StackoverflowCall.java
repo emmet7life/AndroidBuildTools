@@ -2,7 +2,6 @@ package com.novoda.stackoverflow.connectivity;
 
 import android.util.Log;
 
-import com.google.gson.JsonObject;
 import com.novoda.stackoverflow.json.JsonWorker;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ import org.apache.http.message.BasicHeader;
 public class StackoverflowCall implements SimpleHttpCaller.SimpleHttpCallerCallback {
 
     public interface StackoverflowCallCallback {
-        void onStackoverflowCallSuccess(JsonObject jsonObject);
+        void onStackoverflowCallSuccess(String json);
 
         void onStackoverflowCallFailure();
 
@@ -51,8 +50,8 @@ public class StackoverflowCall implements SimpleHttpCaller.SimpleHttpCallerCallb
 
     @Override
     public void onSimpleHttpCallSuccess(HttpResponse response) {
-        JsonObject jsonObject = JsonWorker.jsonFrom(response);
-        callback.onStackoverflowCallSuccess(jsonObject);
+        String json = JsonWorker.readFrom(response);
+        callback.onStackoverflowCallSuccess(json);
     }
 
     @Override

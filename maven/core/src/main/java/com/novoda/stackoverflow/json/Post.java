@@ -1,35 +1,26 @@
 package com.novoda.stackoverflow.json;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Post {
 
-    @SerializedName("question_id")
     private long questionId;
-    @SerializedName("creation_date")
     private long created;
-    @SerializedName("last_activity_date")
     private long lastActivity;
-    @SerializedName("score")
     private long score;
-    @SerializedName("answer_count")
     private int answerCount;
-    @SerializedName("accepted_answer_id")
     private long acceptedAnswer;
-    @SerializedName("title")
     private String title;
-    @SerializedName("tags")
     private List<String> tags = new ArrayList<String>();
-    @SerializedName("view_count")
     private long viewCount;
-    @SerializedName("owner")
     private Owner owner;
-    @SerializedName("link")
     private String urlLink;
-    @SerializedName("is_answered")
     private boolean isAnswered;
 
     public Post(long questionId, long created, long lastActivity, long score, int answerCount, long acceptedAnswer,
@@ -46,6 +37,24 @@ public class Post {
         this.owner = owner;
         this.urlLink = urlLink;
         isAnswered = answered;
+    }
+
+    @JsonCreator
+    public static Post from(
+            @JsonProperty("question_id") long questionId,
+            @JsonProperty("creation_date") long created,
+            @JsonProperty("last_activity_date") long lastActivity,
+            @JsonProperty("score") long score,
+            @JsonProperty("answer_count") int answerCount,
+            @JsonProperty("accepted_answer_id") long acceptedAnswer,
+            @JsonProperty("title") String title,
+            @JsonProperty("tags") List<String> tags,
+            @JsonProperty("view_count") long viewCount,
+            @JsonProperty("owner") Owner owner,
+            @JsonProperty("link") String urlLink,
+            @JsonProperty("is_answered") boolean isAnswered
+    ) {
+        return new Post(questionId, created, lastActivity, score, answerCount, acceptedAnswer, title, tags, viewCount, owner, urlLink, isAnswered);
     }
 
     public long getQuestionId() {
